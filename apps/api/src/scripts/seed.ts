@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { createDb, users, categories, products, productImages, settings } from "@repo/db";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 
 const databaseUrl = process.env.DATABASE_URL;
