@@ -26,7 +26,7 @@ export const ordersController = {
 
     async getById(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = req.params.id;
+            const id = req.params.id as string;
             const order = await db.query.orders.findFirst({
                 where: eq(orders.id, id),
                 with: {
@@ -50,7 +50,7 @@ export const ordersController = {
 
     async updateStatus(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = req.params.id;
+            const id = req.params.id as string;
             const { status } = req.body;
 
             const order = await db.query.orders.findFirst({
