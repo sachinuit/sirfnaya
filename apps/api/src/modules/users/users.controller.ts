@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { eq } from "drizzle-orm";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { db } from "../../config/database.js";
 import { users } from "@repo/db";
 import { ApiError } from "../../middleware/index.js";
@@ -67,7 +67,7 @@ export const usersController = {
     async getById(req: Request, res: Response, next: NextFunction) {
         try {
             const user = await db.query.users.findFirst({
-                where: eq(users.id, req.params.id),
+                where: eq(users.id, req.params.id as string),
             });
 
             if (!user) {
