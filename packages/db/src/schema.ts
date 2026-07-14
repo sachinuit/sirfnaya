@@ -2,7 +2,7 @@ import {
     mysqlTable,
     varchar,
     text,
-    integer,
+    int,
     decimal,
     boolean,
     timestamp,
@@ -73,7 +73,7 @@ export const products = mysqlTable(
         shortDescription: varchar("short_description", { length: 500 }),
         price: decimal("price", { precision: 10, scale: 2 }).notNull(),
         compareAtPrice: decimal("compare_at_price", { precision: 10, scale: 2 }),
-        stock: integer("stock").default(0).notNull(),
+        stock: int("stock").default(0).notNull(),
         sku: varchar("sku", { length: 100 }),
         brand: varchar("brand", { length: 255 }),
         categoryId: varchar("category_id", { length: 36 })
@@ -84,7 +84,7 @@ export const products = mysqlTable(
         isFeatured: boolean("is_featured").default(false).notNull(),
         isArchived: boolean("is_archived").default(false).notNull(),
         rating: decimal("rating", { precision: 2, scale: 1 }).default("0"),
-        reviewCount: integer("review_count").default(0).notNull(),
+        reviewCount: int("review_count").default(0).notNull(),
         specifications: text("specifications"),
         createdAt: timestamp("created_at").defaultNow().notNull(),
         updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -124,7 +124,7 @@ export const productImages = mysqlTable("product_images", {
     publicId: varchar("public_id", { length: 500 }),
     altText: varchar("alt_text", { length: 255 }),
     isPrimary: boolean("is_primary").default(false).notNull(),
-    sortOrder: integer("sort_order").default(0).notNull(),
+    sortOrder: int("sort_order").default(0).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -145,7 +145,7 @@ export const productReviews = mysqlTable(
         userId: varchar("user_id", { length: 36 })
             .references(() => users.id, { onDelete: "cascade" })
             .notNull(),
-        rating: integer("rating").notNull(),
+        rating: int("rating").notNull(),
         title: varchar("title", { length: 255 }),
         comment: text("comment"),
         isVerifiedPurchase: boolean("is_verified_purchase").default(false).notNull(),
@@ -179,7 +179,7 @@ export const cartItems = mysqlTable(
         productId: varchar("product_id", { length: 36 })
             .references(() => products.id, { onDelete: "cascade" })
             .notNull(),
-        quantity: integer("quantity").default(1).notNull(),
+        quantity: int("quantity").default(1).notNull(),
         createdAt: timestamp("created_at").defaultNow().notNull(),
     },
     (table) => [
@@ -263,7 +263,7 @@ export const orderItems = mysqlTable("order_items", {
         .references(() => products.id),
     productName: text("product_name").notNull(),
     productImage: text("product_image"),
-    quantity: integer("quantity").notNull(),
+    quantity: int("quantity").notNull(),
     price: decimal("price", { precision: 10, scale: 2 }).notNull(),
 });
 
@@ -281,9 +281,9 @@ export const orderItemsRelations = relations(orderItems, ({ one }) => ({
 export const coupons = mysqlTable("coupons", {
     id: varchar("id", { length: 36 }).primaryKey(),
     code: varchar("code", { length: 50 }).notNull().unique(),
-    discountPercent: integer("discount_percent").notNull(),
-    maxUses: integer("max_uses"),
-    usesCount: integer("uses_count").default(0).notNull(),
+    discountPercent: int("discount_percent").notNull(),
+    maxUses: int("max_uses"),
+    usesCount: int("uses_count").default(0).notNull(),
     minOrderAmount: decimal("min_order_amount", { precision: 10, scale: 2 }),
     expiresAt: timestamp("expires_at"),
     isActive: boolean("is_active").default(true).notNull(),
@@ -330,6 +330,6 @@ export const settings = mysqlTable("settings", {
     taxRate: decimal("tax_rate", { precision: 5, scale: 2 }).default("0").notNull(),
     shippingFee: decimal("shipping_fee", { precision: 10, scale: 2 }).default("0").notNull(),
     freeShippingThreshold: decimal("free_shipping_threshold", { precision: 10, scale: 2 }),
-    lowStockThreshold: integer("low_stock_threshold").default(10).notNull(),
+    lowStockThreshold: int("low_stock_threshold").default(10).notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
