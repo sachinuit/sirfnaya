@@ -231,7 +231,7 @@ export const orders = mysqlTable("orders", {
     userId: varchar("user_id", { length: 36 })
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }),
-    stripeSessionId: text("stripe_session_id").unique(),
+    stripeSessionId: varchar("stripe_session_id", { length: 500 }).unique(),
     total: decimal("total", { precision: 10, scale: 2 }).notNull(),
     status: varchar("status", { length: 20 })
         .default("PENDING")
