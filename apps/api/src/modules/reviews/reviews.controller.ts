@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 export const reviewsController = {
     async getByProduct(req: Request, res: Response, next: NextFunction) {
         try {
-            const { productId } = req.params;
+            const productId = req.params.productId as string;
 
             const product = await db.query.products.findFirst({
                 where: eq(products.id, productId),
@@ -19,7 +19,7 @@ export const reviewsController = {
             }
 
             const data = await db.query.productReviews.findMany({
-                where: eq(productReviews.productId, productId),
+                where: eq(productReviews.productId, productId as string),
                 with: {
                     user: true,
                 },
