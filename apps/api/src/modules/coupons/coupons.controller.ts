@@ -83,7 +83,7 @@ export const couponsController = {
 
     async update(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = req.params.id;
+            const id = req.params.id as string;
             const { discountPercent, maxUses, expiresAt, isActive } = req.body;
 
             const existing = await db.query.coupons.findFirst({
@@ -114,7 +114,7 @@ export const couponsController = {
 
     async delete(req: Request, res: Response, next: NextFunction) {
         try {
-            const id = req.params.id;
+            const id = req.params.id as string;
             const existing = await db.query.coupons.findFirst({
                 where: eq(coupons.id, id),
             });
