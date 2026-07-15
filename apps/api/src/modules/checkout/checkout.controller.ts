@@ -11,6 +11,9 @@ import { stripe } from "../../config/stripe.js";
 export const checkoutController = {
     async createSession(req: Request, res: Response, next: NextFunction) {
         try {
+            if (!stripe) {
+                throw ApiError.badRequest("Payment service is not configured");
+            }
             const body = createCheckoutSessionSchema.parse(req.body);
             const { items, shippingAddress } = body;
             const user = req.user as JwtPayload;

@@ -11,6 +11,10 @@ import { v4 as uuidv4 } from "uuid";
 export const webhookRouter = Router();
 
 webhookRouter.post("/", async (req: Request, res: Response) => {
+    if (!stripe || !env.STRIPE_WEBHOOK_SECRET) {
+        res.status(503).json({ error: "Payment service is not configured" });
+        return;
+    }
     const sig = req.headers["stripe-signature"];
 
     if (!sig) {
