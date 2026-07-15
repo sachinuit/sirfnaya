@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { users } from "@repo/db";
 import { db } from "../../config/database.js";
@@ -48,10 +48,11 @@ export const authService = {
         let user;
 
         if (existing && !existing.emailVerified) {
-            [user] = await db
+            await db
                 .update(users)
                 .set({ name: input.name, passwordHash, otpCode: otp, otpExpiresAt, updatedAt: new Date() })
                 .where(eq(users.id, existing.id));
+            user = await db.query.users.findFirst({ where: eq(users.id, existing.id) });
         } else {
             await db
                 .insert(users)
