@@ -1,9 +1,50 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
-  images: {
-    domains: ["placehold.co", "res.cloudinary.com"],
-  },
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "images.unsplash.com",
+            },
+            {
+                protocol: "https",
+                hostname: "res.cloudinary.com",
+            },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+            },
+            {
+                protocol: "https",
+                hostname: "placehold.co",
+            },
+        ],
+    },
+    async rewrites() {
+        const apiUrl = process.env.API_URL || "http://localhost:4000/api";
+        return [
+            {
+                // Auth routes are handled by the app/api/auth/[...path]/route.ts Route Handler
+                // which properly forwards Set-Cookie headers. Skip them here.
+                source: "/api/:path((?!auth/).*)",
+                destination: `${apiUrl}/:path*`,
+            },
+        ];
+    },
+
+    async headers() {
+        return [
+            {
+                source: "/(.*)",
+                headers: [
+                    {
+                        key: "Cross-Origin-Opener-Policy",
+                        value: "same-origin-allow-popups",
+                    },
+                ],
+            },
+        ];
+    },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

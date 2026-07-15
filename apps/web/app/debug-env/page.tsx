@@ -1,0 +1,61 @@
+import { cookies } from "next/headers";
+import ClientCookiesDebugger from "./client-cookies";
+
+export const dynamic = "force-dynamic";
+
+export default async function DebugEnvPage() {
+    const apiUrl = process.env.API_URL;
+    const nextPublicApiUrl = process.env.NEXT_PUBLIC_API_URL;
+    
+    const cookieStore = await cookies();
+    const allCookies = cookieStore.getAll();
+
+    return (
+        <div className="p-8 font-mono space-y-4">
+            <h1 className="text-xl font-bold">Environment & Cookie Debugger</h1>
+
+            <div className="border p-4 rounded bg-secondary/20">
+                <h2 className="font-bold mb-2">Server-Side (process.env)</h2>
+                <div className="grid grid-cols-[200px_1fr] gap-2">
+                    <div>API_URL:</div>
+                    <div className="font-bold text-primary break-all">
+                        {apiUrl || "❌ MISSING"}
+                    </div>
+                </div>
+            </div>
+
+            <div className="border p-4 rounded bg-secondary/20">
+                <h2 className="font-bold mb-2">Client-Side (NEXT_PUBLIC_)</h2>
+                <div className="grid grid-cols-[200px_1fr] gap-2">
+                    <div>NEXT_PUBLIC_API_URL:</div>
+                    <div className="font-bold text-primary break-all">
+                        {nextPublicApiUrl || "❌ MISSING"}
+                    </div>
+                </div>
+            </div>
+
+            <div className="border p-4 rounded bg-secondary/20">
+                <h2 className="font-bold mb-2">Server-Side Cookies (next/headers)</h2>
+                {allCookies.length === 0 ? (
+                    <div className="text-red-500 font-bold">❌ No cookies found on server side</div>
+                ) : (
+                    <ul className="space-y-1">
+                        {allCookies.map((c) => (
+                            <li key={c.name} className="break-all">
+                                <span className="font-bold text-emerald-500">{c.name}</span>:{" "}
+                                <span className="text-gray-300">{c.value.substring(0, 30)}...</span> (Length: {c.value.length})
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            <ClientCookiesDebugger />
+
+            <div className="text-sm text-muted-foreground mt-8">
+                <p>If API_URL is missing or doesn't include /api, rewrites will fail.</p>
+            </div>
+        </div>
+    );
+}
+
