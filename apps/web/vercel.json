@@ -6,7 +6,7 @@
         "iad1"
     ],
     "env": {
-        "API_URL": "https://techvault-19lu.onrender.com/api",
+        "API_URL": "https://sirfnaya.onrender.com/api",
         "NEXT_PUBLIC_API_URL": "/api"
     }
 }
