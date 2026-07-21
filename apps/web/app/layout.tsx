@@ -23,11 +23,11 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "TechVault — Premium Electronics Store",
-    template: "%s | TechVault",
+    default: "Sirfnaya — Premium Electronics Store",
+    template: "%s | Sirfnaya",
   },
   description:
-    "Shop the latest smartphones, laptops, tablets, smartwatches, and cameras at TechVault. Premium quality tech at competitive prices.",
+    "Shop the latest smartphones, laptops, tablets, smartwatches, and cameras at Sirfnaya. Premium quality tech at competitive prices.",
   keywords: [
     "electronics",
     "smartphones",
@@ -36,12 +36,13 @@ export const metadata: Metadata = {
     "smartwatches",
     "cameras",
     "tech store",
+    "sirfnaya",
   ],
   openGraph: {
-    title: "TechVault — Premium Electronics Store",
+    title: "Sirfnaya — Premium Electronics Store",
     description:
       "Shop the latest electronics at premium quality and competitive prices.",
-    siteName: "TechVault",
+    siteName: "Sirfnaya",
     type: "website",
   },
 };
