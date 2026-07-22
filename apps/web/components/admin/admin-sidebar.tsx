@@ -12,6 +12,10 @@ import {
     LogOut,
     Menu,
     Ticket,
+    Brain,
+    FileText,
+    BarChart3,
+    Headphones,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/lib/stores/auth-store";
@@ -25,6 +29,10 @@ const sidebarLinks = [
     { href: "/admin/orders", label: "Orders", icon: ShoppingCart },
     { href: "/admin/customers", label: "Customers", icon: Users },
     { href: "/admin/coupons", label: "Coupons", icon: Ticket },
+    { href: "/admin/ai-finance", label: "AI Finance", icon: Brain },
+    { href: "/admin/ai-gst", label: "AI GST", icon: FileText },
+    { href: "/admin/ai-reports", label: "AI Reports", icon: BarChart3 },
+    { href: "/admin/support-tickets", label: "Support", icon: Headphones },
     { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

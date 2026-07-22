@@ -214,7 +214,7 @@ export default function HomePage() {
               Ready to upgrade your setup?
             </h2>
             <p className="relative mt-3 sm:mt-4 text-sm sm:text-base text-muted-foreground max-w-lg mx-auto">
-              Join thousands of tech enthusiasts who already shop with TechVault. Get 10% off
+              Join thousands of tech enthusiasts who already shop with Sirfnaya. Get 10% off
               your first order.
             </p>
             <div className="relative mt-8">

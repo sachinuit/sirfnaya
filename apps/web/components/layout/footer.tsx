@@ -65,9 +65,14 @@ export function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-muted-foreground">
-                        © {new Date().getFullYear()} TechVault. All rights reserved.
-                    </p>
+                    <div className="flex flex-col items-center sm:items-start gap-1">
+                        <p className="text-xs text-muted-foreground">
+                            © {new Date().getFullYear()} Sirfnaya.com. All rights reserved.
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                            Developed by NaminathInfotech.shop Bhopal
+                        </p>
+                    </div>
                     <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
                         <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
